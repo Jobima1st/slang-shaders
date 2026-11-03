@@ -45,7 +45,7 @@ void main() {
    vTsmooth = 0.8;
    const float tsmooth_at_60 = 0.8;
    const float tsmooth_at_30 = 0.65;
-   float t = (60.0 - get_fps()) / 30.0;
+   float t = get_fps() > 90 ? -1 : ((60.0 - get_fps()) / 30.0);
    vTsmooth = mix(tsmooth_at_60, tsmooth_at_30, t);
 }
 
@@ -61,11 +61,11 @@ layout(set = 0, binding = 3) uniform sampler2D black_crush_avglum_passFeedback;
 
 
 void main() {
-	vec3 c_current = texture(Source, vTexCoord).rgb;
-	float lum_past = texture(black_crush_avglum_passFeedback, vTexCoord).a;
+	vec3 c_current = textureLod(Source, vec2(0.5), 20.0).rgb;
+	float lum_past = texture(black_crush_avglum_passFeedback, vec2(0.5,0.5)).a;
 	float lum_current = (c_current.r+c_current.g+c_current.b)/3.0;
 		
 	if (params.FrameCount == 0.0) lum_past = lum_current;
 	float lum_avg = mix(lum_current, lum_past, vTsmooth);
-	FragColor = vec4(c_current,lum_avg);
+	FragColor = vec4(texture(Source, vTexCoord).rgb,lum_avg);
 }

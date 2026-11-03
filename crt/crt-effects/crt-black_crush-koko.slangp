@@ -21,13 +21,12 @@ shaders = 2
        scale_type0 = source
             scale0 = 1.0
         wrap_mode0 = "mirrored_repeat"
+     mipmap_input0 = "true"
             alias0 = "black_crush_avglum_pass"
-float_framebuffer0 = "true""
        
              shader1 = shaders/crt-black-crush-koko/crt-black_crush-koko.slang
          scale_type1 = source
               scale1 = 1.0
           wrap_mode1 = "mirrored_repeat"
-       mipmap_input1 = "true"
               alias1 = "black_crush_pass"
 //float_framebuffer1 = "true"
