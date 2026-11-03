@@ -61,7 +61,7 @@ vec3 adaptive_black(vec3 c, float lum_in, float range, bool dark_crush) {
 
 
 void main() {
-	float lum = textureLod(black_crush_avglum_pass, vec2(0.5), 20.0).a;
+	float lum = texture(black_crush_avglum_pass, vec2(0.5,0.5)).a;
 	vec3 c = texture(black_crush_avglum_pass, vTexCoord).rgb;
 	c = adaptive_black(c, lum, abs(params.ADPT_BLK_RANGE), params.ADPT_BLK_RANGE > 0.0);
 	FragColor.rgb = c;
